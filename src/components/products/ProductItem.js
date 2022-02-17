@@ -13,10 +13,16 @@ function ProductItem(props){
         }else{
             favoritesCtx.addFavorite({
                 id: props.id,
-                name: props.name,
-                description: props.description,
+                sku: props.sku,
                 image: props.image,
-                address: props.address,
+                name: props.name,
+                price: props.price,
+                type: props.type,
+                size: props.size,
+                weight: props.weight,
+                height: props.height,
+                width: props.width,
+                length: props.length
             });
         }
     }
