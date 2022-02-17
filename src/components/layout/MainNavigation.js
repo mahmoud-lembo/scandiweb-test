@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
-import FavoritesContext from '../../store/favorites-context';
+import FavoritesContext from '../../pages/favorites-context';
 import classes from './MainNavigation.module.css';
 function MainNavigation(){
     const favoritesCtx = useContext(FavoritesContext);

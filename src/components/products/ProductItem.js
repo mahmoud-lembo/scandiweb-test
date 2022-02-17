@@ -1,7 +1,7 @@
 import classes from './ProductItem.module.css';
 import Card from '../ui/Card';
 import { useContext } from 'react';
-import FavoritesContext from '../../store/favorites-context';
+import FavoritesContext from '../../pages/favorites-context';
 export let ProductSelectedValues = [];
     
 function ProductItem(props){
