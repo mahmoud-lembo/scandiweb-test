@@ -15,7 +15,7 @@ function AllProductsPage (){
     const Form = new FormData();
     ProductSelectedValues.forEach(ProductSelectedValue => {
       Form.append("sku",ProductSelectedValue);
-        fetch('https://scandiweb.lembo.tech/products/delete',
+        fetch('https://api.lembo.tech/products/delete',
         {
         method: 'POST',
         body: Form
@@ -29,7 +29,7 @@ function AllProductsPage (){
   useEffect(() => {
     setIsLoading(true);
     fetch(
-      'https://scandiweb.lembo.tech/products/get'
+      'https://api.lembo.tech/products/get'
     )
       .then((response) => {
         return response.json();

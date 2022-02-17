@@ -17,7 +17,7 @@ function NewProductPage (){
       Form.append("size", productData.size);
       Form.append("weight", productData.weight);
         fetch(
-            'https://scandiweb.lembo.tech/products/add',
+            'https://api.lembo.tech/products/add',
             {
                 method: 'POST',
                 body: Form,
