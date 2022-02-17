@@ -12,9 +12,15 @@ function App() {
       <Route path='/' element={<AllProductsPage/>} exact/>
       <Route path='/add-product' element={<NewProductPage/>}/>
       <Route path='/favorites' element={<FavoritesPage/>}/>
-      <Redirect exact path='/products/get' to="https://scandiweb.lembo.tech/products/get"/>
-      <Redirect exact path='/products/add' to="https://scandiweb.lembo.techm/products/add"/>
-      <Redirect exact path='/products/delete' to="https://scandiweb.lembo.tech/products/delete"/>
+      <Route path="/products/get" render={() => {
+   return <Redirect  to="https://scandiweb.lembo.tech/products/get" />
+}} />
+    <Route path="/products/add" render={() => {
+   return <Redirect  to="https://scandiweb.lembo.techm/products/add" />
+}} />
+      <Route path="/products/delete" render={() => {
+   return <Redirect  to="https://scandiweb.lembo.tech/products/delete" />
+}} />
         </Routes>
     </Layout>
   );
