@@ -58,8 +58,8 @@ function AllProductsPage (){
       <div className={classes.Group}>
         <span className={classes.PageTitle}>Product List</span>
           <div className={classes.btnGroup}>
-        <Link to="/add-product"><button className={classes.buttonAdd}>Add</button></Link>
-        <button className={classes.buttonDelete} id="delete-product-btn" onClick={MassDelete} >Mass Delete</button>
+        <Link to="/add-product"><button className={classes.buttonAdd}>ADD</button></Link>
+        <button className={classes.buttonDelete} id="delete-product-btn" onClick={MassDelete} >MASS DELETE</button>
           </div>
           </div>
         <hr></hr>

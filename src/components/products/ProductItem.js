@@ -2,6 +2,7 @@ import classes from './ProductItem.module.css';
 import Card from '../ui/Card';
 import { useContext } from 'react';
 import FavoritesContext from '../../pages/favorites-context';
+import '../../index.css'
 export let ProductSelectedValues = [];
     
 function ProductItem(props){
@@ -36,7 +37,7 @@ function ProductItem(props){
     return <li className={classes.item}>
         <Card>
         <div className={classes.image}>
-        <input className={classes['delete-checkbox']} onChange={e => handleChange(e)} value={props.sku} type="checkbox" />
+        <input className={`delete-checkbox`} onChange={e => handleChange(e)} value={props.sku} type="checkbox" />
             <img src={props.image} alt="" />
         </div>
         <div className={classes.content}>
