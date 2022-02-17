@@ -12,11 +12,12 @@ function ProductList(props) {
           name={product.name}
           price={product.price}
           type={product.type}
-          size={product.size}
-          weight={product.weight}
-          height={product.height}
-          width={product.width}
-          length={product.length}
+          attribute={product.attribute}
+          // size={product.size}
+          // weight={product.weight}
+          // height={product.height}
+          // width={product.width}
+          // length={product.length}
         />
       ))}
     </ul>

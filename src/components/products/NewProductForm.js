@@ -45,11 +45,11 @@ function ProductForm(props){
             price: enteredPrice,
             image: enteredImage,
             type: enteredProductType,
-            size: enteredSize,
-            weight: enteredWeight,
             height: enteredHeight,
             width: enteredWidth,
-            length: enteredLength
+            length: enteredLength,
+            size: enteredSize,
+            weight: enteredWeight
         };
         props.onAddProduct(productData);
     }
@@ -69,8 +69,8 @@ function ProductForm(props){
                 <input type='number' required id='price' ref={priceInputRef}/>
             </div>
             <div className={classes.control}>
-                <label htmlFor='image'>Image</label>
-                <input type='url' required id='image' ref={imageInputRef}/>
+                <label htmlFor='image'>Image URL</label>
+                <input type='url' value='https://i.ibb.co/7Q5J3TM/placeholder-image.png' id='image' ref={imageInputRef}/>
             </div>
             <div className={classes.control}>
             <label htmlFor='TypeSwitcher'>Type Switcher</label>
@@ -103,10 +103,6 @@ function ProductForm(props){
           <span>Please Provide dimensions in Centimeters!</span>
       </div>
           : ""}
-            
-            {/*<div className={classes.actions}>
-                <button type="Submit">Add Product</button>
-            </div>*/}
         </form>
     </Card>;
 }

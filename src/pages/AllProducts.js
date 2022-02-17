@@ -12,13 +12,13 @@ function AllProductsPage (){
   const naviage = useNavigate();
 
   function MassDelete(){
+    const Form = new FormData();
     ProductSelectedValues.forEach(ProductSelectedValue => {
-        fetch('https://react-test-34fa1-default-rtdb.europe-west1.firebasedatabase.app/products/'+ProductSelectedValue+'.json',
+      Form.append("sku",ProductSelectedValue);
+        fetch('https://scandiweb.lembo.tech/products/delete',
         {
-        method: 'DELETE',
-        headers: {
-        'Content-Type': 'application/json'
-            }
+        method: 'POST',
+        body: Form
         }).then(() => {
           naviage('/add-product'); // Hot Reload
           naviage('/');
@@ -29,7 +29,7 @@ function AllProductsPage (){
   useEffect(() => {
     setIsLoading(true);
     fetch(
-      'https://react-test-34fa1-default-rtdb.europe-west1.firebasedatabase.app/products.json'
+      'https://scandiweb.lembo.tech/products/get'
     )
       .then((response) => {
         return response.json();

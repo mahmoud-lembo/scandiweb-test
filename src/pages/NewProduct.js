@@ -3,20 +3,28 @@ import classes from "./AllProducts.module.css";
 import { useNavigate } from 'react-router-dom';
 import NewProductForm from '../components/products/NewProductForm';
 function NewProductPage (){
+  const Form = new FormData();
     const naviage = useNavigate();
     function addProductHandler(productData){
+      Form.append("sku", productData.sku);
+      Form.append("name", productData.name);
+      Form.append("price", productData.price);
+      Form.append("image", productData.image);
+      Form.append("type", productData.type);
+      Form.append("height", productData.height);
+      Form.append("width", productData.width);
+      Form.append("length", productData.length);
+      Form.append("size", productData.size);
+      Form.append("weight", productData.weight);
         fetch(
-            'https://react-test-34fa1-default-rtdb.europe-west1.firebasedatabase.app/products.json',
+            'https://scandiweb.lembo.tech/products/add',
             {
                 method: 'POST',
-                body: JSON.stringify(productData),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+                body: Form,
             }
             ).then(() => {
-                naviage('/', { replace: true });
-            });
+              naviage('/', { replace: true });
+          });
     }
     return <section>
       <div className={classes.Group}>

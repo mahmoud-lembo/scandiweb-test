@@ -18,6 +18,7 @@ function ProductItem(props){
                 name: props.name,
                 price: props.price,
                 type: props.type,
+                attribute: props.attribute,
                 size: props.size,
                 weight: props.weight,
                 height: props.height,
@@ -35,17 +36,18 @@ function ProductItem(props){
     return <li className={classes.item}>
         <Card>
         <div className={classes.image}>
-        <input className={classes['delete-checkbox']} onChange={e => handleChange(e)} value={props.id} type="checkbox" />
+        <input className={classes['delete-checkbox']} onChange={e => handleChange(e)} value={props.sku} type="checkbox" />
             <img src={props.image} alt="" />
         </div>
         <div className={classes.content}>
             <span>{props.sku}</span>
             <span>{props.name}</span>
             <span>{Number(props.price).toFixed(2)}$</span>
-            <span>{props.type}</span>
-            <span>Size: {props.size} MB</span>
-            <span>Weight: {props.weight}KG</span>
-            <span>Dimension <small>(HxWxL)</small>: {props.height} x {props.width} x {props.length} CM</span>
+            <span>{props.attribute}</span>
+            {/* <span>{props.type}</span> */}
+            {props.size >= 0 ? <span>Size: {props.size} MB</span> : ''}
+            {props.weight >= 0 ? <span>Weight: {props.weight}KG</span> : ''}
+            {props.height >= 0 ? <span>Dimension <small>(HxWxL)</small>: {props.height} x {props.width} x {props.length} CM</span> : ''}
             
         </div>
         <div className={classes.actions}>
