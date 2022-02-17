@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+import classes from "./AllProducts.module.css";
 import { useNavigate } from 'react-router-dom';
 import NewProductForm from '../components/products/NewProductForm';
 function NewProductPage (){
@@ -17,7 +19,14 @@ function NewProductPage (){
             });
     }
     return <section>
-        <h1>Product Add</h1>
+      <div className={classes.Group}>
+        <span className={classes.PageTitle}>Product Add</span>
+          <div className={classes.btnGroup}>
+        <button form='product_form' type="submit" className={classes.buttonAdd}>Save</button>
+        <Link to="/"><button className={classes.buttonDelete} id="cancel-btn">Cancel</button></Link>
+          </div>
+          </div>
+        <hr></hr>
         <NewProductForm onAddProduct={addProductHandler} />
     </section>;
 }

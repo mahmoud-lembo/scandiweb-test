@@ -1,9 +1,30 @@
+import { Link } from 'react-router-dom';
 import ProductList from "../components/products/ProductList";
 import { useState, useEffect } from "react";
+import classes from "./AllProducts.module.css";
+import { useNavigate } from 'react-router-dom';
+import {ProductSelectedValues} from "../components/products/ProductItem";
 
 function AllProductsPage (){
+  
   const [isLoading, setIsLoading] = useState(true);
   const [loadedProducts, setLoadedProducts] = useState([]);
+  const naviage = useNavigate();
+
+  function MassDelete(){
+    ProductSelectedValues.forEach(ProductSelectedValue => {
+        fetch('https://react-test-34fa1-default-rtdb.europe-west1.firebasedatabase.app/products/'+ProductSelectedValue+'.json',
+        {
+        method: 'DELETE',
+        headers: {
+        'Content-Type': 'application/json'
+            }
+        }).then(() => {
+          naviage('/add-product'); // Hot Reload
+          naviage('/');
+        });
+    });
+    }
 
   useEffect(() => {
     setIsLoading(true);
@@ -34,7 +55,14 @@ function AllProductsPage (){
     return (<section><p>Loading...</p></section>);
   }
     return <section>
-        <h1>All Products</h1>
+      <div className={classes.Group}>
+        <span className={classes.PageTitle}>Product List</span>
+          <div className={classes.btnGroup}>
+        <Link to="/add-product"><button className={classes.buttonAdd}>Add</button></Link>
+        <button className={classes.buttonDelete} id="delete-product-btn" onClick={MassDelete} >Mass Delete</button>
+          </div>
+          </div>
+        <hr></hr>
       <ProductList products={loadedProducts} />
     </section>;
 }

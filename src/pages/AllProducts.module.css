@@ -1,0 +1,49 @@
+.PageTitle{
+  display:inline-flex;
+    font-size: 2em;
+    font-weight: bold;
+  }
+  .btnGroup{
+    display:inline-flex;
+  }
+.Group{
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between
+}
+
+.buttonDelete {
+  font: inherit;
+  cursor: pointer;
+  background-color: #dc3545;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid #dc3545;
+  border-radius: 4px;
+  font-weight: bold;
+  margin: 0.3rem;
+}
+
+.buttonDelete:hover,
+.buttonDelete:active {
+  background-color: #c82333;
+  border-color: #c82333;
+}
+
+.buttonAdd {
+  font: inherit;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border: 1px solid #007bff;
+  border-radius: 4px;
+  font-weight: bold;
+  margin: 0.3rem;
+}
+
+.buttonAdd:hover,
+.buttonAdd:active {
+  background-color: #0069d9;
+  border-color: #0069d9;
+}

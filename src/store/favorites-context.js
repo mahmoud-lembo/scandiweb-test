@@ -8,16 +8,30 @@ const FavoritesContext = createContext({
     itemIsFavorite: (productID) => {}
 });
 export function FavoritesContextProvider(props){
-    const [userFavorites, setUserFavorites] = useState([]);
+    var prevFavorites = localStorage.getItem('Favorites') ? JSON.parse(localStorage.getItem('Favorites'))['Favorites'] : [];
+    const [userFavorites, setUserFavorites] = useState(prevFavorites);
 
     function addFavoriteHandler(favoriteProduct){
         setUserFavorites((prevUserFavorites) => {
-            return prevUserFavorites.concat(favoriteProduct);
+            var prevFavorites = localStorage.getItem('Favorites') ? localStorage.getItem('Favorites').replace("]}", ",") : '{ "Favorites": [';
+            prevFavorites = prevFavorites + JSON.stringify(favoriteProduct) + ']}';
+            localStorage.setItem('Favorites', prevFavorites);
+            return JSON.parse(localStorage.getItem('Favorites'))['Favorites'];
         });
     }
     function removeFavoriteHandler(productID){
         setUserFavorites(prevUserFavorites => {
-            return prevUserFavorites.filter(product => product.id !== productID);
+            var prevFavorites = JSON.parse(localStorage.getItem('Favorites'));
+            if(prevFavorites && prevFavorites['Favorites'].length > 1){
+                prevFavorites = prevFavorites['Favorites'].filter( element => element.id !== productID);
+                prevFavorites = '{ "Favorites": ' + JSON.stringify(prevFavorites) + '}';
+                localStorage.setItem('Favorites', prevFavorites);
+                return JSON.parse(localStorage.getItem('Favorites'))['Favorites'];
+            }else
+            {
+                localStorage.removeItem('Favorites');
+                return [];
+            }
         }
             )
     }

@@ -2,61 +2,6 @@ import { useRef, useState } from 'react';
 import Card from '../ui/Card';
 import classes from './NewProductForm.module.css';
 
-const TypeSwitcher = ({ name, items, selectid }) => {
-  const productTypeInputRef = useRef();
-  const sizeInputRef = useRef();
-  const weightInputRef = useRef();
-  const heightInputRef = useRef();
-  const widthInputRef = useRef();
-  const lengthInputRef = useRef();
-    const defaultSelectValue = items[0]
-    const [selected, setSelected] = useState(defaultSelectValue)
-  
-    return (
-      <>
-        <div className={classes.control}>
-        <label htmlFor={selectid}>{name}</label>{' '}
-        <select
-          id={selectid}
-          name={selectid}
-          defaultValue={selected}
-          style={{ color: selected === defaultSelectValue ? "black" : "gray" }}
-          onChange={e => setSelected(e.target.value)}
-          ref={productTypeInputRef}
-        >
-          {items.map(item => (
-            <option key={item} value={item}>
-              {item}
-            </option>
-          ))}
-        </select>
-        </div>
-  
-        {selected === "DVD" ?  <div className={classes.control}>
-                <label htmlFor='size'>Size (MB)</label>
-                <input type='text' required id='size' ref={sizeInputRef}/>
-                <span>Please Provide Size in Megabytes!</span>
-            </div>
-      : selected === "Book" ?             <div className={classes.control}>
-      <label htmlFor='weight'>Weight (KG)</label>
-      <input type='text' required id='weight' ref={weightInputRef}/>
-      <span>Please Provide Weight in Kilograms!</span>
-  </div>
-      : selected === "Furniture" ?             <div className={classes.control}>
-      <label htmlFor='height'>Height (CM)</label>
-      <input type='text' required id='height' ref={heightInputRef}/>
-
-      <label htmlFor='width'>Width (CM)</label>
-      <input type='text' required id='width' ref={widthInputRef}/>
-
-      <label htmlFor='length'>Length (CM)</label>
-      <input type='text' required id='length' ref={lengthInputRef}/>
-      <span>Please Provide dimensions in HxWxL format!</span>
-  </div>
-      : ""}
-      </>
-    )
-  }
 function ProductForm(props){
     const skuInputRef = useRef();
     const nameInputRef = useRef();
@@ -68,20 +13,31 @@ function ProductForm(props){
     const heightInputRef = useRef();
     const widthInputRef = useRef();
     const lengthInputRef = useRef();
-    //const options=[{label:'DVD',value:'DVD'},{label:'Furniture',value:'Furniture'},{label:'Book',value:'Book'}];
-    const [state,setState] = useState(false);
+    const [currentState, changeState] = useState();
+
+
     function SubmitHandler(event){
+      
         event.preventDefault();
         const enteredSku = skuInputRef.current.value;
         const enteredName = nameInputRef.current.value;
         const enteredPrice = priceInputRef.current.value;
         const enteredImage = imageInputRef.current.value;
         const enteredProductType = productTypeInputRef.current.value;
-        const enteredSize = sizeInputRef.current.value;
-        const enteredWeight = weightInputRef.current.value;
-        const enteredHeight = heightInputRef.current.value;
-        const enteredWidth = widthInputRef.current.value;
-        const enteredLength = lengthInputRef.current.value;
+        let enteredSize = '-1';
+        let enteredHeight = '-1';
+        let enteredWidth = '-1';
+        let enteredLength = '-1';
+        let enteredWeight = '-1';
+        if(enteredProductType === "DVD"){
+           enteredSize = sizeInputRef.current.value;
+        }else if(enteredProductType === "Furniture"){
+           enteredHeight = heightInputRef.current.value;
+           enteredWidth = widthInputRef.current.value;
+           enteredLength = lengthInputRef.current.value;
+        }else if(enteredProductType === "Book"){
+           enteredWeight = weightInputRef.current.value;
+        }
 
         const productData = {
             sku: enteredSku,
@@ -97,6 +53,7 @@ function ProductForm(props){
         };
         props.onAddProduct(productData);
     }
+    // End of SubmitHandler
     return <Card>
         <form className={classes.form} id='product_form' onSubmit={SubmitHandler}>
             <div className={classes.control}>
@@ -116,46 +73,40 @@ function ProductForm(props){
                 <input type='url' required id='image' ref={imageInputRef}/>
             </div>
             <div className={classes.control}>
-            {/* <label htmlFor='address'>Type Switcher</label>
-            <select onChange={() => setState(true)}>
-            <option>Select product type</option>
-            <option value="DVD">DVD</option>
-            <option value="Book">Book</option>
-            <option value="Furniture">Furniture</option>
+            <label htmlFor='TypeSwitcher'>Type Switcher</label>
+            <select onChange={(e) => changeState(e.target.value)} id='productType' required ref={productTypeInputRef}>
+            <option>Select Product Type...</option>
+            <option>DVD</option>
+            <option>Book</option>
+            <option>Furniture</option>
             </select>
-            {state && <div>Hi </div>} */}
-            <TypeSwitcher
-  selectid="productType"
-  name="Type Switcher"
-  items={['Select product type', 'DVD', 'Book', 'Furniture']}
-/>
             </div>
+            {currentState === "DVD" ?  <div className={classes.control}>
+                    <label htmlFor='size'>Size (MB)</label>
+                    <input type='text' required id='size' ref={sizeInputRef}/>
+                    <span>Please Provide Size in Megabytes!</span>
+                </div>
+          : currentState === "Book" ?             <div className={classes.control}>
+          <label htmlFor='weight'>Weight (KG)</label>
+          <input type='text' required id='weight' ref={weightInputRef}/>
+          <span>Please Provide Weight in Kilograms!</span>
+      </div>
+          : currentState === "Furniture" ?             <div className={classes.control}>
+          <label htmlFor='height'>Height (CM)</label>
+          <input type='text' required id='height' ref={heightInputRef}/>
+    
+          <label htmlFor='width'>Width (CM)</label>
+          <input type='text' required id='width' ref={widthInputRef}/>
+    
+          <label htmlFor='length'>Length (CM)</label>
+          <input type='text' required id='length' ref={lengthInputRef}/>
+          <span>Please Provide dimensions in Centimeters!</span>
+      </div>
+          : ""}
             
-            {/*<div className={classes.control}>
-                <label htmlFor='size'>Size (MB)</label>
-                <input type='text' required id='size' ref={sizeInputRef}/>
-                <span>Please Provide Size in Megabytes!</span>
-            </div>
-            <div className={classes.control}>
-                <label htmlFor='weight'>Weight (KG)</label>
-                <input type='text' required id='weight' ref={weightInputRef}/>
-                <span>Please Provide Weight in Kilograms!</span>
-            </div>
-            <div className={classes.control}>
-                <label htmlFor='height'>Height (CM)</label>
-                <input type='text' required id='height' ref={heightInputRef}/>
-
-                <label htmlFor='width'>Width (CM)</label>
-                <input type='text' required id='width' ref={widthInputRef}/>
-
-                <label htmlFor='length'>Length (CM)</label>
-                <input type='text' required id='length' ref={lengthInputRef}/>
-                <span>Please Provide dimensions in HxWxL format!</span>
-          </div>*/}
-            
-            <div className={classes.actions}>
-                <button>Add Product</button>
-            </div>
+            {/*<div className={classes.actions}>
+                <button type="Submit">Add Product</button>
+            </div>*/}
         </form>
     </Card>;
 }
