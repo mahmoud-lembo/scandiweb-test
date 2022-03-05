@@ -15,18 +15,7 @@ class Furniture extends Product implements Validate
         $this->image = $inputs['image'];
         $this->price = $inputs['price'];
         $this->type = $inputs['type'];
-        
-    }
-
-    public function validateAttributes()
-    {
-        if(is_numeric($this->inputs['height']) && is_numeric($this->inputs['width']) && is_numeric($this->inputs['length']) && floatval($this->inputs['height'] >= 0) && floatval($this->inputs['width'] >= 0) && floatval($this->inputs['length'] >= 0))
-        {
-            $this->attribute = 'Dimension: '.$this->inputs['height'].'x'.$this->inputs['width'].'x'.$this->inputs['length'];
-            return true;
-        }
-
-        return false;
+        $this->attribute = 'Dimension: '.$this->inputs['height'].'x'.$this->inputs['width'].'x'.$this->inputs['length'];
     }
 
 };

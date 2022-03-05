@@ -1,7 +1,5 @@
 <?php
 
-include 'controller/Helper.php';
-
 function autoload($class_name) 
 {
 

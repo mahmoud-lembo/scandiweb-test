@@ -8,40 +8,28 @@ class Validator
     function __construct(array $inputs)
     {
         $this->inputs = $inputs;
-
-        switch ($this->inputs['type']) {
-            case "DVD":
-                $this->validate(new  DVD($this->inputs));
-                break;
-            case "Book":
-                $this->validate(new  Book($this->inputs));
-                break;
-            case "Furniture":
-                $this->validate(new  Furniture($this->inputs));
-                break;
-        }
-
+        $this->validate(new  $this->inputs['type']($this->inputs));
     }
 
     public function validate(Validate $validate)
     {
         if(!$validate->validateSKU())
-            $this->message .= 'Invalid SKU or already exists <br>';
+            $this->message .= 'Invalid SKU or already exists';
         if(!$validate->validateName())
-            $this->message .= 'Invalid name <br>';
+            $this->message .= 'Invalid name';
         if($validate->validatePrice())
-            $this->message .= 'Invalid price <br>';
+            $this->message .= 'Invalid price';
         if($validate->validateType())
-            $this->message .= 'Invalid type <br>';
+            $this->message .= 'Invalid type';
         if(!$validate->validateAttributes())
-            $this->message .= 'Invalid attributes <br>';
+            $this->message .= 'Invalid attributes';
 
         if($this->message == null)
         {
             $validate->save();
             return response(array('status' => 'success', 'message' => 'Product added to the database'));
         }   
-
-        return response(array('status' => 'danger', 'message' => $this->message));
+        
+        return [http_response_code(409),response(array('status' => 'error', 'message' => $this->message))];
     }
 };

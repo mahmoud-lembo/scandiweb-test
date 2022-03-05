@@ -1,26 +1,18 @@
 <?php
 
-class Product extends QueryBuilder
+abstract class Product extends QueryBuilder
 {
     private $table_name = 'products';
 
     protected $inputs;
-
-    //protected $id;
     protected $sku;
     protected $name;
-    //protected $image;
     protected $price;
     protected $type;
 
     function __construct()
     {
         parent::__construct($this->table_name);
-    }
-
-    public function getArray(): array
-    {
-        return array($this->id ,$this->sku, $this->name, $this->image, $this->price, $this->type, $this->attribute);
     }
 
     public function find(string $sku)
@@ -31,11 +23,6 @@ class Product extends QueryBuilder
     public function save()
     {
         return $this->insert(array($this->id ,$this->sku, $this->name, $this->image,$this->price, $this->type, $this->attribute));
-    }
-
-    public function getAll()
-    {
-        return $this->select(['*'])->get();
     }
 
     public function validateSKU()
@@ -56,6 +43,11 @@ class Product extends QueryBuilder
     public function validateType()
     {
         return !(preg_match('/^[A-Za-z]+$/', $this->inputs['type']) && (strlen($this->inputs['type']) > 0));
+    }
+    
+    public function validateAttributes()
+    {
+    return (preg_match('/Dimension: [0-9]+x[0-9]+x[0-9]+ CM|Weight: [0-9]+ KG|Size: [0-9]+ MB/', $this->attribute));
     }
 
 };

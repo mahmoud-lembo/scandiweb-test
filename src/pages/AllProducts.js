@@ -1,70 +1,56 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import ProductList from "../components/products/ProductList";
-import { useState, useEffect } from "react";
 import classes from "./AllProducts.module.css";
-import { useNavigate } from 'react-router-dom';
-import {ProductSelectedValues} from "../components/products/ProductItem";
+import { ProductSelectedValues } from "../components/products/ProductItem";
+import { useProducts } from "../hooks/useProducts";
+import { API, instance } from "../api/api";
 
-function AllProductsPage (){
-  
-  const [isLoading, setIsLoading] = useState(true);
-  const [loadedProducts, setLoadedProducts] = useState([]);
-  const naviage = useNavigate();
+function AllProductsPage() {
+  const { data, isFetching, error, refetch } = useProducts();
 
-  function MassDelete(){
+  function MassDelete() {
     const Form = new FormData();
-    ProductSelectedValues.forEach(ProductSelectedValue => {
-      Form.append("sku",ProductSelectedValue);
-        fetch('https://api.lembo.tech/products/delete',
-        {
-        method: 'POST',
-        body: Form
-        }).then(() => {
-          naviage('/add-product'); // Hot Reload
-          naviage('/');
-        });
+    ProductSelectedValues.forEach((ProductSelectedValue) => {
+      Form.append("sku", ProductSelectedValue);
+      instance.post(API.deleteProducts, Form).then(() => refetch());
     });
-    }
-
-  useEffect(() => {
-    setIsLoading(true);
-    fetch(
-      'https://api.lembo.tech/products/get'
-    )
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        const products = [];
-
-        for (const key in data) {
-          const product = {
-            id: key,
-            ...data[key]
-          };
-
-          products.push(product);
-        }
-
-        setIsLoading(false);
-        setLoadedProducts(products);
-      });
-  }, []);
-
-  if(isLoading){
-    return (<section><p>Loading...</p></section>);
   }
-    return <section>
+
+  if (isFetching) {
+    return (
+      <section>
+        <p>Loading...</p>
+      </section>
+    );
+  }
+
+  if (error) return null;
+
+  return (
+    <section>
       <div className={classes.Group}>
         <span className={classes.PageTitle}>Product List</span>
-          <div className={classes.btnGroup}>
-        <Link to="/add-product"><button className={classes.buttonAdd}>ADD</button></Link>
-        {loadedProducts.length ? <button className={classes.buttonDelete} id="delete-product-btn" onClick={MassDelete} >MASS DELETE</button> : ''}
-          </div>
-          </div>
-        <hr></hr>
-      <ProductList products={loadedProducts} />
-    </section>;
+        <div className={classes.btnGroup}>
+          <Link to="/add-product">
+            <button className={classes.buttonAdd}>ADD</button>
+          </Link>
+          {data.length ? (
+            <button
+              className={classes.buttonDelete}
+              id="delete-product-btn"
+              onClick={MassDelete}
+            >
+              MASS DELETE
+            </button>
+          ) : (
+            ""
+          )}
+        </div>
+      </div>
+      <hr></hr>
+      <ProductList products={data} />
+    </section>
+  );
 }
 
 export default AllProductsPage;

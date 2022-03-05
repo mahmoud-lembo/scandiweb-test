@@ -15,17 +15,7 @@ class DVD extends Product implements Validate
         $this->image = $inputs['image'];
         $this->price = $inputs['price'];
         $this->type = $inputs['type'];
+        $this->attribute = 'Size: '.$this->inputs['size'].' MB';
         
-    }
-
-    public function validateAttributes()
-    {
-        if(is_numeric($this->inputs['size']) && floatval($this->inputs['size'] >= 0))
-        {
-            $this->attribute = 'Size: '.$this->inputs['size'].' MB';
-            return true;
-        }
-
-        return false;
     }
 };

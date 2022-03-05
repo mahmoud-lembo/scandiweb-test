@@ -9,7 +9,7 @@ class ProductList
 
     public static function show()
     {
-        return response((new Product)->getAll());
+        return response((new Main)->getAll());
     }
 
     public static function add(array $inputs): void 
@@ -20,7 +20,7 @@ class ProductList
     public static function delete(array $data)
     {
         foreach ($data as $value) {
-            (new Product)->delete('sku', $value);
+            (new Main)->delete('sku', $value);
         }
 
         return response(array('status' => 'success', 'message' => 'Deleted count of products: '.count($data)));
