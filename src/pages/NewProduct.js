@@ -37,7 +37,7 @@ function NewProductPage() {
         </div>
       </div>
       <hr></hr>
-      <div>{mutation.error?.response?.data?.message}</div>
+      <div className={classes.errorAlert} style={{display: mutation.error ? 'block' : 'none' }}>{mutation.error?.response?.data?.message}</div>
       <NewProductForm onAddProduct={mutation} />
     </section>
   );
