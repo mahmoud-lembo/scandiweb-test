@@ -1,70 +1,40 @@
-# Getting Started with Create React App
+# Junior Developer Test Task
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Live URL: https://scandiweb.lembo.tech/
 
-## Available Scripts
+A web-app (accessible by an URL) containing two pages for:
 
-In the project directory, you can run:
+1. Product list page
+2. Adding a product page
+3. Favorite Products Page
 
-### `npm start`
+*Utilize OOP principles to handle differences in type logic/behavior
+*MySQL logic handled by objects with properties instead of direct column values. using setters and getters
+*Meet PSR standards
+*Classes that extend each other, and abstract class for the main product logic
+*Avoid using conditional statements (polymorphism)
+*Do not using different endpoints for different products types
+*PHP: ^7.0, plain classes, no frameworks, OOP approach
+*SASS Usage
+*Mysqli Database Connection
+*React Components
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### the list items:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Product Image
+- SKU (unique for each product)
+- Name
+- Price in $
+- One of the product-specific attributes and its value
+    - Size (in MB) for DVD-disc
+    - Weight (in Kg) for Book
+    - Dimensions (HxWxL) for Furniture
 
-### `npm test`
+### **Add product page :**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- The form dynamically changed when the type is switched
+- Special attributes have a description, related to their type, e.g.: “Please, provide dimensions” / “Please, provide weight” / “Please, provide size” when related product type is selected
+- All fields are mandatory for submission, missing values should trigger notification “Please, submit required data”
+- Implement input field value validation, invalid data must trigger notification “Please, provide the data of indicated type”
+- The page have a “Save” button to save the product. Once saved, return to the “Product List” page with the new product added.
+- The page have a “Cancel” button to cancel adding the product action. Once canceled, returned to the “Product List” page with no new products added.
