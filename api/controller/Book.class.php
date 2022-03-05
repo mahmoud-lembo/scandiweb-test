@@ -1,5 +1,5 @@
 <?php
-
+namespace Controller;
 class Book extends Product implements Validate
 {
     protected $inputs;

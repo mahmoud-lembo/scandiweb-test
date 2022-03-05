@@ -1,5 +1,5 @@
 <?php
-
+namespace Model;
 abstract class QueryBuilder
 {
     private $db;

@@ -1,5 +1,5 @@
 <?php
-
+namespace Controller;
 class ProductList
 {
 

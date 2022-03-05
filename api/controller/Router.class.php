@@ -1,5 +1,5 @@
 <?php
-
+namespace Controller;
 class Router 
 {
     private $path = array();
@@ -21,7 +21,7 @@ class Router
         if($key !== false)
         {
             if($this->path[$key][2] == 'get')
-                return call_user_func($this->path[$key][1]);
+                return \call_user_func($this->path[$key][1]);
             else
                 return call_user_func($this->path[$key][1], $_POST);
         }

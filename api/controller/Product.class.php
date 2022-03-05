@@ -1,6 +1,6 @@
 <?php
-
-abstract class Product extends QueryBuilder
+namespace Controller;
+abstract class Product extends \Model\QueryBuilder
 {
     private $table_name = 'products';
 

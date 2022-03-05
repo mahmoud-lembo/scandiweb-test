@@ -1,5 +1,5 @@
 <?php
-
+namespace Controller;
 class Validator
 {
     private $inputs;
@@ -8,7 +8,8 @@ class Validator
     function __construct(array $inputs)
     {
         $this->inputs = $inputs;
-        $this->validate(new  $this->inputs['type']($this->inputs));
+        $productClass = "Controller\\".$this->inputs['type'];
+        $this->validate(new $productClass($this->inputs));
     }
 
     public function validate(Validate $validate)

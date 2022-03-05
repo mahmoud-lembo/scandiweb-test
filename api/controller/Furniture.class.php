@@ -1,5 +1,5 @@
 <?php
-
+namespace Controller;
 class Furniture extends Product implements Validate
 {
     protected $inputs;

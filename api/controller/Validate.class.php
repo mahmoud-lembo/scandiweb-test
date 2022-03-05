@@ -1,5 +1,5 @@
 <?php
-
+namespace Controller;
 interface Validate
 {
     public function validateSKU();

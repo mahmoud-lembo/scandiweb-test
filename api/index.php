@@ -7,12 +7,12 @@ include 'autoload.php';
 include 'Helper.php';
 include 'config.php';
 
-$router = new Router();
+$router = new Controller\Router();
 
-$router->get('/products/get', 'ProductList::show');
+$router->get('/products/get', 'Controller\ProductList::show');
 
-$router->post('/products/add', 'ProductList::add');
-$router->post('/products/delete', 'ProductList::delete');
+$router->post('/products/add', 'Controller\ProductList::add');
+$router->post('/products/delete', 'Controller\ProductList::delete');
 
 $router->check();
 

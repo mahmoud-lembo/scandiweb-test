@@ -1,5 +1,5 @@
 <?php
-
+namespace Controller;
 class DVD extends Product implements Validate
 {
     protected $inputs;
